@@ -13,6 +13,10 @@ export default function ProductCard({ product }) {
           src={getImageUrl(product.images)}
           alt={product.name}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = '/placeholder-product.svg';
+          }}
         />
       </div>
       <div className="p-4">

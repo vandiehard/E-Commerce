@@ -42,7 +42,17 @@ export const PAYMENT_STATUS_COLORS = {
 };
 
 export const getImageUrl = (images) => {
-  if (!images || images.length === 0) return '/placeholder-product.svg';
-  const img = Array.isArray(images) ? images[0] : images;
-  return img.startsWith('http') ? img : img;
+  if (!images) return '/placeholder-product.svg';
+  // Parse JSON string (from raw SQL queries)
+  if (typeof images === 'string') {
+    try {
+      images = JSON.parse(images);
+    } catch {
+      // If it's already a URL string (not JSON)
+      return images.startsWith('http') ? images : '/placeholder-product.svg';
+    }
+  }
+  if (!Array.isArray(images) || images.length === 0) return '/placeholder-product.svg';
+  const img = images[0];
+  return img && img.startsWith('http') ? img : '/placeholder-product.svg';
 };

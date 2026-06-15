@@ -80,6 +80,10 @@ export default function ProductDetailPage() {
             src={getImageUrl(images)}
             alt={product.name}
             className="w-full h-full object-cover"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = '/placeholder-product.svg';
+            }}
           />
         </div>
 
