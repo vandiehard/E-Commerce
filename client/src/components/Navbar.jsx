@@ -27,34 +27,37 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="border-b border-border bg-white sticky top-0 z-50">
+    <nav className="glass-strong border-b border-white/30 sticky top-0 z-50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/" className="text-xl font-bold tracking-tight">STORE</Link>
+          <Link to="/" className="flex flex-col leading-tight">
+            <span className="text-xl font-extrabold tracking-tight gradient-text">ree-store</span>
+            <span className="text-[10px] text-text-light font-medium tracking-widest uppercase hidden sm:block">Where Style Meets Substance</span>
+          </Link>
 
           {/* Search - desktop */}
           <form onSubmit={handleSearch} className="hidden md:flex flex-1 max-w-md mx-8">
             <div className="relative w-full">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-light" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-purple-400" />
               <input
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search products..."
-                className="w-full pl-10 pr-4 py-2 border border-border rounded-lg text-sm focus:outline-none focus:border-primary"
+                className="w-full pl-10 pr-4 py-2 bg-white/60 border border-white/50 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent placeholder:text-text-light transition-all"
               />
             </div>
           </form>
 
           {/* Right side */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             {user ? (
               <>
-                <Link to="/cart" className="relative p-2 hover:bg-surface rounded-lg transition-colors">
+                <Link to="/cart" className="relative p-2.5 hover:bg-white/60 rounded-xl transition-all hover:scale-110">
                   <ShoppingCart className="w-5 h-5" />
                   {itemCount > 0 && (
-                    <span className="absolute -top-1 -right-1 bg-primary text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                    <span className="absolute -top-1 -right-1 bg-gradient-to-r from-pink-500 to-rose-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full shadow-md font-bold">
                       {itemCount}
                     </span>
                   )}
@@ -64,23 +67,24 @@ export default function Navbar() {
                 <div className="relative">
                   <button
                     onClick={() => setUserMenuOpen(!userMenuOpen)}
-                    className="flex items-center gap-2 p-2 hover:bg-surface rounded-lg transition-colors"
+                    className="flex items-center gap-2 p-2.5 hover:bg-white/60 rounded-xl transition-all hover:scale-105"
                   >
                     <User className="w-5 h-5" />
                     <span className="hidden md:inline text-sm">{user.name}</span>
                   </button>
 
                   {userMenuOpen && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white border border-border rounded-lg shadow-lg py-1 z-50">
-                      <Link to="/orders" onClick={() => setUserMenuOpen(false)} className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-surface">
+                    <div className="absolute right-0 mt-2 w-52 glass-strong rounded-2xl shadow-xl border border-white/40 py-2 z-50 overflow-hidden">
+                      <Link to="/orders" onClick={() => setUserMenuOpen(false)} className="flex items-center gap-2 px-4 py-2.5 text-sm hover:bg-white/60 transition-colors">
                         <Package className="w-4 h-4" /> My Orders
                       </Link>
                       {user.role === 'admin' && (
-                        <Link to="/admin" onClick={() => setUserMenuOpen(false)} className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-surface">
+                        <Link to="/admin" onClick={() => setUserMenuOpen(false)} className="flex items-center gap-2 px-4 py-2.5 text-sm hover:bg-white/60 transition-colors">
                           <LayoutDashboard className="w-4 h-4" /> Admin Panel
                         </Link>
                       )}
-                      <button onClick={handleLogout} className="flex items-center gap-2 w-full px-4 py-2 text-sm hover:bg-surface text-left">
+                      <hr className="my-1 border-white/30" />
+                      <button onClick={handleLogout} className="flex items-center gap-2 w-full px-4 py-2.5 text-sm hover:bg-white/60 text-red-600 transition-colors text-left">
                         <LogOut className="w-4 h-4" /> Logout
                       </button>
                     </div>
@@ -89,8 +93,8 @@ export default function Navbar() {
               </>
             ) : (
               <div className="flex items-center gap-2">
-                <Link to="/login" className="px-4 py-2 text-sm hover:bg-surface rounded-lg transition-colors">Login</Link>
-                <Link to="/register" className="px-4 py-2 text-sm bg-primary text-white rounded-lg hover:opacity-90 transition-opacity">Register</Link>
+                <Link to="/login" className="px-4 py-2 text-sm font-medium hover:bg-white/60 rounded-xl transition-all hover:scale-105">Login</Link>
+                <Link to="/register" className="px-5 py-2 text-sm font-semibold bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-full hover:shadow-lg hover:shadow-purple-300/50 hover:scale-105 transition-all duration-300">Register</Link>
               </div>
             )}
 
@@ -106,13 +110,13 @@ export default function Navbar() {
           <div className="md:hidden pb-4">
             <form onSubmit={handleSearch}>
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-light" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-purple-400" />
                 <input
                   type="text"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Search products..."
-                  className="w-full pl-10 pr-4 py-2 border border-border rounded-lg text-sm focus:outline-none focus:border-primary"
+                  className="w-full pl-10 pr-4 py-2 bg-white/60 border border-white/50 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent placeholder:text-text-light transition-all"
                 />
               </div>
             </form>
